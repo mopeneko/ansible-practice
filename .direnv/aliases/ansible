@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-ansible () 
-{ 
-    poetry run ansible $@
-}
-ansible "$@"
