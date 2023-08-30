@@ -13,3 +13,10 @@
 poetry install
 direnv allow
 ```
+
+
+### Run Ansible Playbook
+
+```sh
+ansible-playbook -i hosts site.yml
+```
