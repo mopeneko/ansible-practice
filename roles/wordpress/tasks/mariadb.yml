@@ -6,8 +6,7 @@
 
 - name: Install MariaDB Server
   apt:
-    pkg:
-      - mariadb-server
+    name: mariadb-server
   become: yes
   tags: mariadb
 
