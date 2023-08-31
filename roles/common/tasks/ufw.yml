@@ -1,0 +1,13 @@
+- name: Allow SSH
+  ufw:
+    rule: allow
+    name: OpenSSH
+  become: yes
+  tags: ufw
+
+- name: Enable UFW / deny by default
+  ufw:
+    state: enabled
+    default: deny
+  become: yes
+  tags: ufw
