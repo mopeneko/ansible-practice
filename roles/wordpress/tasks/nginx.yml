@@ -11,10 +11,37 @@
   become: yes
   tags: nginx
 
-- name: Start and enable Nginx
+- name: Remove default Nginx configuration file
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+  become: yes
+  tags: nginx
+
+- name: Put Nginx configuration file
+  template:
+    src: wordpress.conf.j2
+    dest: /etc/nginx/sites-available/wordpress.conf
+    owner: www-data
+    group: www-data
+    mode: 0600
+  become: yes
+  tags: nginx
+
+- name: Generate symlink to sites-enabled
+  file:
+    src: /etc/nginx/sites-available/wordpress.conf
+    dest: /etc/nginx/sites-enabled/wordpress.conf
+    owner: www-data
+    group: www-data
+    state: link
+  become: yes
+  tags: nginx
+
+- name: Restart / Enable Nginx
   service:
     name: nginx
-    state: started
+    state: restarted
     enabled: yes
   become: yes
   tags: nginx

@@ -34,3 +34,10 @@
     mode: 0400
   become: yes
   tags: wordpress
+
+- name: Install PHP extensions for WordPress
+  apt:
+    pkg:
+      - php8.2-mysql
+  become: yes
+  tags: wordpress

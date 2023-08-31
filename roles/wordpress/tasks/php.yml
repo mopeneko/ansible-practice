@@ -7,6 +7,8 @@
 
 - name: Install PHP 8.2
   apt:
-    name: php8.2
+    pkg:
+      - php8.2
+      - php8.2-fpm
   become: yes
   tags: php
