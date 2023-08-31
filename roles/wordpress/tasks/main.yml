@@ -1,2 +1,1 @@
-- import_tasks: ping.yml
 - import_tasks: ppa.yml
