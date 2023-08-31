@@ -1,3 +1,9 @@
+- name: Include vars of MariaDB
+  include_vars:
+    file: mariadb.yml
+    name: mariadb
+  tags: mariadb
+
 - name: Install MariaDB Server
   apt:
     pkg:
@@ -27,7 +33,7 @@
 
 - name: Create database
   mysql_db:
-    db: "{{ dbname }}"
+    db: "{{ mariadb.dbname }}"
     state: present
     encoding: utf8
     login_unix_socket: /var/run/mysqld/mysqld.sock
@@ -36,9 +42,9 @@
 
 - name: Create database user
   mysql_user:
-    name: "{{ dbuser }}"
+    name: "{{ mariadb.dbuser }}"
     password: "{{ dbpass }}"
-    priv: "{{ dbname }}.*:ALL"
+    priv: "{{ mariadb.dbname }}.*:ALL"
     login_unix_socket: /var/run/mysqld/mysqld.sock
   become: yes
   tags: mariadb
