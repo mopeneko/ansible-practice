@@ -1,3 +1,9 @@
+- name: Include vars of PHP
+  include_vars:
+    file: php.yml
+    name: php
+  tags: wordpress
+
 - name: Add ondrej/php PPA repository
   apt_repository:
     repo: ppa:ondrej/php
@@ -5,10 +11,10 @@
   become: yes
   tags: php
 
-- name: Install PHP 8.2
+- name: Install PHP
   apt:
     pkg:
-      - php8.2
-      - php8.2-fpm
+      - "php{{ php.version }}"
+      - "php{{ php.version }}-fpm"
   become: yes
   tags: php

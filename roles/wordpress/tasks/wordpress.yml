@@ -10,6 +10,12 @@
     name: mariadb
   tags: wordpress
 
+- name: Include vars of PHP
+  include_vars:
+    file: php.yml
+    name: php
+  tags: wordpress
+
 - name: Download WordPress package
   get_url:
     url: "https://ja.wordpress.org/wordpress-{{ wordpress.version }}-ja.tar.gz"
@@ -44,6 +50,6 @@
 - name: Install PHP extensions for WordPress
   apt:
     pkg:
-      - php8.2-mysql
+      - "php{{ php.version }}-mysql"
   become: yes
   tags: wordpress
