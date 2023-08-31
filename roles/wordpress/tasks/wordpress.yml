@@ -1,3 +1,9 @@
+- name: Include vars of WordPress
+  include_vars:
+    file: wordpress.yml
+    name: wordpress
+  tags: wordpress
+
 - name: Include vars of MariaDB
   include_vars:
     file: mariadb.yml
@@ -6,13 +12,13 @@
 
 - name: Download WordPress package
   get_url:
-    url: https://ja.wordpress.org/wordpress-6.3.1-ja.tar.gz
+    url: "https://ja.wordpress.org/wordpress-{{ wordpress.version }}-ja.tar.gz"
     dest: /tmp
   tags: wordpress
 
 - name: Extract WordPress package
   unarchive:
-    src: /tmp/wordpress-6.3.1-ja.tar.gz
+    src: "/tmp/wordpress-{{ wordpress.version }}-ja.tar.gz"
     dest: /var/www
     copy: no
   become: yes
