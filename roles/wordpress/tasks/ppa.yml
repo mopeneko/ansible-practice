@@ -1,0 +1,4 @@
+- name: Add ondrej/php PPA repository
+  apt_repository:
+    repo: ppa:ondrej/php
+  become: yes
