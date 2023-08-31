@@ -1,0 +1,36 @@
+- name: Include vars of MariaDB
+  include_vars:
+    file: mariadb.yml
+    name: mariadb
+  tags: wordpress
+
+- name: Download WordPress package
+  get_url:
+    url: https://ja.wordpress.org/wordpress-6.3.1-ja.tar.gz
+    dest: /tmp
+  tags: wordpress
+
+- name: Extract WordPress package
+  unarchive:
+    src: /tmp/wordpress-6.3.1-ja.tar.gz
+    dest: /var/www
+    copy: no
+  become: yes
+  tags: wordpress
+
+- name: Generate secret key
+  uri:
+    url: https://api.wordpress.org/secret-key/1.1/salt/
+    return_content: yes
+  register: secret_key
+  tags: wordpress
+
+- name: Generate wp-config.php
+  template:
+    src: wp-config.php.j2
+    dest: /var/www/wordpress/wp-config.php
+    owner: www-data
+    group: www-data
+    mode: 0400
+  become: yes
+  tags: wordpress
