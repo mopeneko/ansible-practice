@@ -1,0 +1,27 @@
+- name: Uninstall Apache2
+  apt:
+    name: apache2
+    state: absent
+  become: yes
+  tags: nginx
+
+- name: Install Nginx
+  apt:
+    name: nginx
+  become: yes
+  tags: nginx
+
+- name: Start and enable Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+  become: yes
+  tags: nginx
+
+- name: Allow Nginx HTTP
+  ufw:
+    rule: allow
+    name: Nginx HTTP
+  become: yes
+  tags: nginx
