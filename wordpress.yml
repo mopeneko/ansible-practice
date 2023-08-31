@@ -1,3 +1,7 @@
 - hosts: wordpress
   roles:
     - wordpress
+  vars_prompt:
+    - name: dbpass
+      prompt: Enter password for WordPress database
+      default: passw0rd
