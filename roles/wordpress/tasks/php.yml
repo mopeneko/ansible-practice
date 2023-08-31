@@ -3,7 +3,10 @@
     repo: ppa:ondrej/php
     update_cache: yes
   become: yes
+  tags: php
+
 - name: Install PHP 8.2
   apt:
     name: php8.2
   become: yes
+  tags: php
